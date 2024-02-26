@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readers</title>
+</head>
+
+<body>
+<a th:href="@{/ui/book}">Список книг</a>
+<a th:href="@{/ui/issue}">Список выдачей</a>
+<h1>Список читателей</h1>
+<ul>
+    <li th:each="reader : ${listReaders}">
+        <a th:href="@{/ui/reader/{id}(id = ${reader.getId()})}" th:text="${reader.getName()}"></a>
+    </li>
+</ul>
+<form th:action="@{/logout}" method="post">
+    <input type = "submit" value = "Выход из системы" />
+</form>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issues</title>
+</head>
+
+<body>
+<a th:href="@{/ui/reader}">Список читателей</a>
+<a th:href="@{/ui/book}">Список книг</a>
+<h1>Список выдачей</h1>
+<table>
+    <tr>
+        <th>#</th>
+        <th>Название книги</th>
+        <th>Читатель</th>
+        <th>Дата выдачи</th>
+        <th>Дата возвращения</th>
+    </tr>
+    <tr th:each="issue: ${issueService.getAllIssues()}">
+        <td th:text="${issue.getId()}"></td>
+        <td th:text="${bookService.getBookById(issue.getBookId()).getName()}"></td>
+        <td>
+            <a th:href="@{/ui/reader/{id}(id = ${issue.getReaderId()})}"
+               th:text="${readerService.getReaderById(issue.getReaderId()).getName()}"></a>
+        </td>
+        <td th:text="${issue.formatDate(issue.getIssuedAt())}"></td>
+        <td th:text="${issue.formatDate(issue.getReturnedAt())}"></td>
+    </tr>
+</table>
+<form th:action="@{/logout}" method="post">
+    <input type = "submit" value = "Выход из системы" />
+</form>
+</body>
+</html>

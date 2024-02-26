@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${currentReader.getName()}"></title>
+</head>
+
+<body>
+    <a th:href="@{/ui/reader}">Список читателей</a>
+    <a th:href="@{/ui/book}">Список книг</a>
+    <a th:href="@{/ui/issue}">Список выдачей</a>
+    <h1 th:text="${currentReader.getName()} + ' ID#' + ${currentReader.getId()}"></h1>
+    <h2>Список выданных книг</h2>
+    <ul>
+        <li th:each="book : ${listIssuedBooks}" th:text="${book.getName()}"></li>
+    </ul>
+</body>
+</html>
